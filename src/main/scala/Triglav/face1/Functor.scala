@@ -32,7 +32,7 @@ trait FunctorLaws[F[_]] extends Functor[F]{
 }
 
 object FunctorInstances {
-  val listFunctor1: Functor[List] = new Functor[List]() { // TODO add custom impl of List and move this guy there
+  val listFunctor1: Functor[List] = new Functor[List]() {
     def map[A, B](fa: List[A])(ab: A => B): List[B] = fa match {
       case Nil => Nil
       case head :: tail => ab(head) :: map(tail)(ab)
@@ -77,14 +77,4 @@ object FunctorInstances {
     def map[A, B](fun: Input => A)(g: A => B): Input => B =
       fun andThen g
   }
-
-  // TODO write test showing it does not meet functor laws because it is not lazy
-  /*
-  implicit val futureFunctor: Functor[Future] = new Functor[Future] {
-    import scala.concurrent.ExecutionContext.Implicits.global
-
-    def map[A, B](future: Future[A])(g: A => B): Future[B] =
-      future.map(g)
-  }
-  */
 }

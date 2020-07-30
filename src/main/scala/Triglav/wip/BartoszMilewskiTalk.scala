@@ -1,6 +1,6 @@
 package Triglav.wip
 
-import Triglav.face1.Functor
+import Triglav.face1.{Functor, ~}
 import Triglav.wip.IdNat.IdentityNat
 import Triglav.wip.ProReader.ProReader
 

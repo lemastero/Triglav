@@ -1,4 +1,4 @@
-package Triglav.wip
+package Triglav.face1
 
 trait ~[A,B] {
   def to: B => A

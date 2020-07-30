@@ -3,7 +3,7 @@ package Triglav.eye
 import Triglav.face2.Profunctor
 import Triglav.tambara._
 
-object Optics {
+object ProOptics {
   type Optics[P[-_,+_],S,T,A,B] = P[A,B] => P[S,T]
 
   case class Adapter[S,T,A,B](from: S => A, to: B => T)

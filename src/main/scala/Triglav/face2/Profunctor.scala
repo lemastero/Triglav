@@ -7,10 +7,9 @@ package Triglav.face2
 trait Profunctor[:=:>[-_,+_]] extends Joker[:=:>] with Bard[:=:>] {
   def dimap[S,T,A,B](pab: A :=:> B)(sa: S => A, bt: B => T): S :=:> T
 
-  // derived methods
-  def lmap[S,A,B](pab: A :=:> B)(f: S => A): S :=:> B =
-    dimap[S,B,A,B](pab)(f,identity[B])
-  def rmap[A,B,T](pab: A :=:> B)(f: B => T): A :=:> T =
-    dimap[A,T,A,B](pab)(identity[A],f)
+  override def map[A,B,T](fa: A :=:> B)(f: B => T): A :=:> T =
+    dimap(fa)(identity,f)
+  override def contramap[A, AA, B](fa: A :=:> B)(f: AA => A): AA :=:> B =
+    dimap(fa)(f,identity)
 }
 

@@ -14,4 +14,8 @@ trait Strong[=>:[-_,+_]] extends Profunctor[=>:] {   // TambaraModule (_,C)
 
 object Strong {
   type Arrow[=>:[-_,+_]] = Strong[=>:]
+
+  def uncurry[P[-_,+_],A,B,C](pa: P[A, B => C])(implicit S: Strong[P]): P[(A,B),C] = {
+    S.map(S.first[A,B=>C,B](pa)){ case (bc, b) => bc(b) }
+  }
 }

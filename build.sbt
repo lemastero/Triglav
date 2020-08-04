@@ -9,9 +9,10 @@ scalaVersion := "2.13.3"
 val zioVersion = "1.0.0"
 
 libraryDependencies ++= Seq(
-  "dev.zio" %% "zio"             % zioVersion,
-  "dev.zio" %% "zio-test"        % zioVersion % Test,
-  "dev.zio" %% "zio-test-sbt"    % zioVersion % Test
+  "com.chuusai" %% "shapeless"    % "2.3.3",
+  "dev.zio"     %% "zio"          % zioVersion,
+  "dev.zio"     %% "zio-test"     % zioVersion % Test,
+  "dev.zio"     %% "zio-test-sbt" % zioVersion % Test
 )
 
 addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.0" cross CrossVersion.full)

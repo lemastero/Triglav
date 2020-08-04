@@ -6,7 +6,7 @@ version := "0.0.1"
 
 scalaVersion := "2.13.3"
 
-val zioVersion = "1.0.0-RC21-2"
+val zioVersion = "1.0.0"
 
 libraryDependencies ++= Seq(
   "dev.zio" %% "zio"             % zioVersion,

@@ -1,6 +1,7 @@
 package Triglav.tambara
 
 import Triglav.face2.{Profunctor, ProfunctorLaws}
+import Triglav.monoidal.MonoidalCategoryInstances.productMCat.{α, α_inv, λ, λ_inv}
 
 trait CartesianStrong[P[-_,+_]] extends Profunctor[P] {   // TambaraModule (_,C)
   def first[A,B,C]:  (A P B) => P[(A,C),(B,C)]
@@ -17,9 +18,9 @@ trait CartesianStrongLaws[P[-_,+_]]
   extends CartesianStrong[P]
   with ProfunctorLaws[P] {
 
-  // ((A,B), C) ~ (A, (B,C))
-  private def assoc[A,B,C]: (((A,B), C)) => (A, (B,C))  = { case ((a,c),d) => (a,(c,d)) }
-  private def unassoc[A,B,C]: ((A, (B,C))) => ((A,B), C) = { case (a,(c,d)) => ((a,c),d) }
+//   // ((A,B), C) ~ (A, (B,C))
+//   private def assoc[A,B,C]: (((A,B), C)) => (A, (B,C))  = α
+//   private def unassoc[A,B,C]: ((A, (B,C))) => ((A,B), C) = α_inv
 
   def secondSecondIsDimapReAssoc[A,B,C,D](p: P[A,B]): Boolean = {
     //          second[D]
@@ -35,14 +36,14 @@ trait CartesianStrongLaws[P[-_,+_]]
 
     //                          dimap[(C,D)](unassoc, assoc)
     // P[((C,D),A), ((C,D),B)] =============================> P[((C,D),A), ((C,D),B)]
-    val r2: P[(C,(D,A)), (C,(D,B))] = dimap[(C,(D,A)), (C,(D,B)),((C,D), A), ((C,D), B)](r1)(unassoc, assoc)
+    val r2: P[(C,(D,A)), (C,(D,B))] = dimap[(C,(D,A)), (C,(D,B)),((C,D), A), ((C,D), B)](r1)(α_inv, α)
 
     l2 == r2
   }
 
   // ((),A) ~ A
-  def lunit[A]: ((Unit,A)) => A = { case((), a) => a }
-  def lunitr[A]: A => (Unit,A) = a => ((), a)
+//  def lunit[A]: ((Unit,A)) => A = λ
+//  def lunitr[A]: A => (Unit,A) = λ_inv
 
   def dimapLunitIsSecond[A,B,C,D](p: P[A,B]): Boolean = {
     //          second[D]
@@ -51,7 +52,7 @@ trait CartesianStrongLaws[P[-_,+_]]
 
     //           dimap[(C,D)](lunit, lunitr)
     // P[A,B] =============================> P[(Unit,A), (Unit,B)]
-    val r: P[(Unit,A), (Unit,B)] = dimap[(Unit,A), (Unit,B), A, B](p)(lunit, lunitr)
+    val r: P[(Unit,A), (Unit,B)] = dimap[(Unit,A), (Unit,B), A, B](p)(λ, λ_inv)
 
     l == r
   }

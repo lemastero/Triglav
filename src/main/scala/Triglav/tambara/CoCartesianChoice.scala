@@ -3,6 +3,7 @@ package Triglav.tambara
 import Triglav.face2.{Profunctor, ProfunctorLaws}
 import Triglav.incarnations.EitherInc.\/
 import Triglav.face0.Void
+import Triglav.monoidal.MonoidalCategoryInstances.coproductMonCat.{α, α_inv, λ, λ_inv}
 
 trait CoCartesianChoice[=>:[-_,+_]] extends Profunctor[=>:] {
   def left[A,B,C]: (A =>: B) => (Either[A,C] =>: Either[B,C])      // TambaraModule Either(_,C)
@@ -19,17 +20,8 @@ trait CoCartesianChoiceLaws[P[-_,+_]]
     with ProfunctorLaws[P] {
 
   // ((A \/ B) \/ C) ~ (A \/ (B \/ C))
-  private def coassoc[A,B,C]: (A \/ B) \/ C => A \/ (B \/ C) = {
-    case Left(Left(a)) => Left(a)
-    case Left(Right(b)) => Right(Left(b))
-    case Right(c) => Right(Right(c))
-  }
-
-  private def uncoassoc[A,B,C]: A \/ (B \/ C) => (A \/ B) \/ C = {
-    case Left(a) => Left(Left(a))
-    case Right(Left(b)) => Left(Right(b))
-    case Right(Right(c)) => Right(c)
-  }
+//  private def coassoc[A,B,C]: (A \/ B) \/ C => A \/ (B \/ C) = α
+//  private def uncoassoc[A,B,C]: A \/ (B \/ C) => (A \/ B) \/ C = α_inv
 
   def rightRightIsDimapReUnAssoc[A,B,C,D](p: P[A,B]): Boolean = {
     //          second[D]
@@ -45,17 +37,14 @@ trait CoCartesianChoiceLaws[P[-_,+_]]
 
     //                          dimap[(C,D)](unassoc, coassoc)
     // P[((C,D),A), ((C,D),B)] =============================> P[((C,D),A), ((C,D),B)]
-    val r2: P[C \/ (D \/ A), C \/ (D \/ B)] = dimap[C \/ (D \/ A), C \/ (D \/ B), (C \/ D) \/ A, (C \/ D) \/ B](r1)(uncoassoc, coassoc)
+    val r2: P[C \/ (D \/ A), C \/ (D \/ B)] = dimap[C \/ (D \/ A), C \/ (D \/ B), (C \/ D) \/ A, (C \/ D) \/ B](r1)(α_inv, α)
 
     l2 == r2
   }
 
   // (Nothing \/ A)  ~ A
-  def lzero[A]: (Void \/ A) => A = {
-    case Right(a) => a
-    case Left(v) => v.absurd[A]
-  }
-  def lzeror[A]: A => (Void \/ A) = a => Right(a)
+//  def lzero[A]: (Void \/ A) => A = λ
+//  def lzeror[A]: A => (Void \/ A) = λ_inv
 
   def dimapLunitIsSecond[A,B,C,D](p: P[A,B]): Boolean = {
     //          right[D]
@@ -64,7 +53,7 @@ trait CoCartesianChoiceLaws[P[-_,+_]]
 
     //           dimap(lzero, lzeror)
     // P[A,B] =============================> P[0 + A, 0 + B]
-    val r: P[Void \/ A, Void \/ B] = dimap[Void \/ A, Void \/ B, A, B](p)(lzero, lzeror)
+    val r: P[Void \/ A, Void \/ B] = dimap[Void \/ A, Void \/ B, A, B](p)(λ, λ_inv)
 
     l == r
   }

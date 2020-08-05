@@ -3,7 +3,7 @@ package Triglav.tambara
 import Triglav.face2.{Profunctor, ProfunctorLaws}
 import Triglav.incarnations.EitherInc.\/
 import Triglav.face0.Void
-import Triglav.monoidal.MonoidalCategoryInstances.coproductMonCat.{α, α_inv, λ, λ_inv}
+import Triglav.monoidal1.MonoidalCategoryInstances.coproductMonCat.{α, α_inv, λ, λ_inv}
 
 trait CoCartesianChoice[=>:[-_,+_]] extends Profunctor[=>:] {
   def left[A,B,C]: (A =>: B) => (Either[A,C] =>: Either[B,C])      // TambaraModule Either(_,C)

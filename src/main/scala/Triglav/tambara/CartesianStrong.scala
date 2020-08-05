@@ -1,7 +1,7 @@
 package Triglav.tambara
 
 import Triglav.face2.{Profunctor, ProfunctorLaws}
-import Triglav.monoidal.MonoidalCategoryInstances.productMCat.{α, α_inv, λ, λ_inv}
+import Triglav.monoidal1.MonoidalCategoryInstances.productMCat.{α, α_inv, λ, λ_inv}
 
 trait CartesianStrong[P[-_,+_]] extends Profunctor[P] {   // TambaraModule (_,C)
   def first[A,B,C]:  (A P B) => P[(A,C),(B,C)]

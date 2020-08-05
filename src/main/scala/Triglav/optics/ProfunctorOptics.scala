@@ -1,12 +1,12 @@
-package Triglav.eye
+package Triglav.optics
 
+import Triglav.optics.classic.GeneralizedOpics.Adapter
 import Triglav.face2.Profunctor
 import Triglav.tambara._
 
-object ProOptics {
+object ProfunctorOptics {
   type Optics[P[-_,+_],-S,+T,+A,-B] = P[A,B] => P[S,T]
 
-  case class Adapter[-S,+T,+A,-B](from: S => A, to: B => T)
   trait AdapterP[-S,+T,+A,-B] {
     def apply[P[-_,+_]](implicit PP: Profunctor[P]): Optics[P,S,T,A,B]
   }

@@ -1,12 +1,12 @@
 package Triglav.incarnations
 
-import Triglav.face3.Triglav
+import Triglav.face3.Trifunctor
 
 object Function2CurriedRev {
 
   type CurriedRev[-B,+C,+A] = (C => B) => A
 
-  def curriedRevTriglav: Triglav[CurriedRev] = new Triglav[CurriedRev] {
+  def curriedRevTriglav: Trifunctor[CurriedRev] = new Trifunctor[CurriedRev] {
 
     override def timap[B,C,A,BB,CC,AA](fa: (C => B) => A)(f: BB => B, g: C => CC, h: A => AA): (CC => BB) => AA =
       k => h(fa(g andThen k andThen f))

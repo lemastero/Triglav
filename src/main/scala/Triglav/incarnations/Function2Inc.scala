@@ -1,10 +1,10 @@
 package Triglav.incarnations
 
-import Triglav.face3.Norne
+import Triglav.face3.Nifunctor
 
 object Function2Inc {
 
-  def function2Norne: Norne[Function2] = new Norne[Function2] {
+  def function2Norne: Nifunctor[Function2] = new Nifunctor[Function2] {
 
     override def nimap[E,A,R,EE,AA,RR](fa: (E,A) => R)(f: EE => E, g: AA => A, h: R => RR): (EE,AA) => RR =
       { case(ee,aa) => h(fa(f(ee),g(aa))) }

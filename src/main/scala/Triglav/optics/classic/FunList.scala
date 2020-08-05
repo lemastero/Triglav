@@ -1,4 +1,4 @@
-package Triglav.eye.classic
+package Triglav.optics.classic
 
 sealed trait FunList[+A,-B,+T]
 case class Done[+A,-B,+T](v: T)

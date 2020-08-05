@@ -1,4 +1,4 @@
-package Triglav.wip
+package Triglav.cat2
 
 import Triglav.face1.Functor
 

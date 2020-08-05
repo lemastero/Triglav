@@ -1,4 +1,4 @@
-package Triglav.wip
+package Triglav.catpro
 
 /** Natural transformation for profunctors */
 abstract class ~~>[F[_,_], G[_,_]] { self =>
@@ -13,5 +13,12 @@ abstract class ~~>[F[_,_], G[_,_]] { self =>
   def compose[H[_,_]](other: H ~~> F): H ~~> G =
     new ~~>[H,G] {
       def apply[A,B](fa: H[A,B]): G[A,B] = self(other(fa))
+    }
+}
+
+object IdentityDinat {
+  def IdentityDinat[P[_,_]]: P ~~> P =
+    new ~~>[P,P] {
+      def apply[A,B](fa: P[A,B]): P[A,B] = fa
     }
 }

@@ -1,7 +1,8 @@
-package Triglav.monoidal
+package Triglav.monoidal1
 
+import Triglav.cat1.Category
 import Triglav.face2.{Bifunctor, BifunctorInstances}
-import Triglav.monoidal.CategoryInstances.Function1Cat
+import Triglav.cat1.CategoryInstances.Function1Cat
 import Triglav.face0.Void
 
 /**

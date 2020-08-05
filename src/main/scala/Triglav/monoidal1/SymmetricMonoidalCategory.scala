@@ -1,4 +1,4 @@
-package Triglav.monoidal
+package Triglav.monoidal1
 
 trait SymmetricMonoidalCategoryLaws[:=>[_,_],⊗[+_,+_], I]
   extends BraidedMonoidalCategory[:=>,⊗, I]

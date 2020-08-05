@@ -1,4 +1,4 @@
-package Triglav.monoidal
+package Triglav.cat1
 
 trait Category[Morphism[_,_]] extends Semicategory[Morphism] {
   def id[Obj]: Morphism[Obj,Obj]

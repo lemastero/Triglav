@@ -1,4 +1,4 @@
-package Triglav.monoidal
+package Triglav.cat1
 
 trait Semicategory[Morphism[_,_]] {
   def compose[A,B,C](f: Morphism[B,C])(g: Morphism[A,B]): Morphism[A,C]

@@ -1,8 +1,12 @@
 package Triglav.wip
 
+import Triglav.cat1.Reader.Reader
 import Triglav.face1.{Functor, ~}
-import Triglav.wip.IdNat.IdentityNat
-import Triglav.wip.ProReader.ProReader
+import Triglav.cat2.IdNat.IdentityNat
+import Triglav.cat2.~>
+import Triglav.catpro.ProReader.ProReader
+import Triglav.catpro.~~>
+import Triglav.catpro.IdentityDinat.IdentityDinat
 
 class BartoszMilewskiTalk {
   trait Profunctor[P[_,_]] {
@@ -25,8 +29,6 @@ class BartoszMilewskiTalk {
   abstract class Prism[S,T,A,B] {
     def apply[P[_,_] : Choice]: P[A,B] => P[S,T]
   }
-
-  type Reader[A,X] = A => X
 
   // type Yo f a = Functor f => Reader a -> f
   abstract class Yo[F[_]:Functor,A] {
@@ -91,11 +93,6 @@ class BartoszMilewskiTalk {
   }
 
   type YoEmbedP[R[_,_],Q[_,_]] = ForAllP[R,Q] ~ (R ~~> Q)
-
-  def IdentityDinat[P[_,_]]: P ~~> P =
-    new ~~>[P,P] {
-      def apply[A,B](fa: P[A,B]): P[A,B] = fa
-    }
 
   def yoEmbedP[R[_,_],Q[_,_]]: YoEmbedP[R,Q] = new YoEmbedP[R,Q] {
     def to: R ~~> Q => ForAllP[R,Q] = rq => new ForAllP[R,Q]{

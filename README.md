@@ -1,4 +1,5 @@
 # Triglav
+
 RnD project exploring in Scala:
 - profunctor optics
 - trifunctors
@@ -8,3 +9,5 @@ RnD project exploring in Scala:
 - 2-categories of type constructors
 - toposes
 - limits
+
+This repo intends to create base for further research about: automatic code completition, optimization of functional proramms, generating FP libraries targetted for particular problem domain.

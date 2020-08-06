@@ -13,12 +13,3 @@ trait CategoryLaws[M[_,_]] extends Category[M] {
     compose(fa)(id[A]) == fa
   }
 }
-
-object CategoryInstances {
-  trait Function1Cat extends Category[Function1] {
-    def id[A]: A => A = identity[A]
-    def compose[A, B, C](f: B => C)(g: A => B): A => C = g andThen f
-  }
-
-  val scalaProperTypesAndPureFunction1: Category[Function1] = new Function1Cat {}
-}

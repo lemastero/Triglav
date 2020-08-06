@@ -3,7 +3,7 @@ package Triglav.monoidal1
 import Triglav.cat1.Category
 import Triglav.face2.{Bifunctor, BifunctorInstances}
 import Triglav.cat1.CategoryInstances.Function1Cat
-import Triglav.face0.Void
+import Triglav.cat1.CategoryInstances.TyFun1Cat.Initial
 
 /**
  * Monoidal Categories based on Category of Scala types and functions
@@ -76,43 +76,43 @@ object MonoidalCategoryInstances {
     with Function1Cat {
 
     val tensor: Bifunctor[Tuple2] = BifunctorInstances.tupleBifunctor
-    def ρ[A](fa: (A, Unit)): A = fa._1
-    def ρ_inv[A](a: A): (A, Unit) = (a, ())
-    def λ[A](fa: (Unit, A)): A = fa._2
+    def ρ[A](fa: (A,Unit)): A = fa._1
+    def ρ_inv[A](a: A): (A,Unit) = (a, ())
+    def λ[A](fa: (Unit,A)): A = fa._2
     def λ_inv[A, B](a: A): (Unit, A) = ((), a)
-    def α[A, B, C](fa: ((A, B), C)): (A, (B, C)) = fa match {case ((a,b),c) => (a, (b, c)) }
-    def α_inv[A, B, C](fa: (A, (B, C))): ((A, B), C) = fa match {case (a,(b,c)) => ((a, b), c) }
+    def α[A, B, C](fa: ((A,B), C)): (A, (B,C)) = fa match {case ((a,b),c) => (a, (b,c)) }
+    def α_inv[A, B, C](fa: (A, (B,C))): ((A,B), C) = fa match {case (a,(b,c)) => ((a,b), c) }
   }
 
   val productMCat: MonoidalCategory[Function1,Tuple2,Unit] = new TupleMc{}
 
   trait Function1EitherMc
-    extends MonoidalCategory[Function1,Either,Void]
+    extends MonoidalCategory[Function1,Either,Initial]
       with Function1Cat {
 
     val tensor: Bifunctor[Either] = BifunctorInstances.eitherBifunctor
-    def ρ[A](fa: Either[A, Void]): A = fa match {
+    def ρ[A](fa: Either[A,Initial]): A = fa match {
       case Left(a) => a
       case Right(v) => v.absurd[A]
     }
-    def ρ_inv[A](a: A): Either[A, Void] = Left(a)
-    def λ[A](fa: Either[Void, A]): A = fa match {
+    def ρ_inv[A](a: A): Either[A,Initial] = Left(a)
+    def λ[A](fa: Either[Initial,A]): A = fa match {
       case Right(a) => a
       case Left(a) => a.absurd[A]
     }
-    def λ_inv[A, B](a: A): Either[Void, A] = Right(a)
-    def α[A, B, C](fa: Either[Either[A, B], C]): Either[A, Either[B, C]] =
+    def λ_inv[A, B](a: A): Either[Initial, A] = Right(a)
+    def α[A, B, C](fa: Either[Either[A,B], C]): Either[A, Either[B,C]] =
       fa match {
         case Left(Left(a)) => Left(a)
         case Left(Right(b)) => Right(Left(b))
         case Right(c) => Right(Right(c))
       }
-    def α_inv[A, B, C](fa: Either[A, Either[B, C]]): Either[Either[A, B], C] = fa match {
+    def α_inv[A, B, C](fa: Either[A, Either[B,C]]): Either[Either[A,B], C] = fa match {
       case Left(a) => Left(Left(a))
       case Right(Left(b)) => Left(Right(b))
       case Right(Right(c)) => Right(c)
     }
   }
 
-  val coproductMonCat: MonoidalCategory[Function1,Either,Void] = new Function1EitherMc {}
+  val coproductMonCat: MonoidalCategory[Function1,Either,Initial] = new Function1EitherMc {}
 }

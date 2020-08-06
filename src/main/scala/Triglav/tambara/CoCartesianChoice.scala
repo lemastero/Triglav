@@ -2,7 +2,7 @@ package Triglav.tambara
 
 import Triglav.face2.{Profunctor, ProfunctorLaws}
 import Triglav.incarnations.EitherInc.\/
-import Triglav.face0.Void
+import Triglav.cat1.CategoryInstances.TyFun1Cat.Initial
 import Triglav.monoidal1.MonoidalCategoryInstances.coproductMonCat.{α, α_inv, λ, λ_inv}
 
 trait CoCartesianChoice[=>:[-_,+_]] extends Profunctor[=>:] {
@@ -49,11 +49,11 @@ trait CoCartesianChoiceLaws[P[-_,+_]]
   def dimapLunitIsSecond[A,B,C,D](p: P[A,B]): Boolean = {
     //          right[D]
     // P[A,B] ============> P[0 + A, 0 + B]
-    val l: P[Void \/ A, Void \/ B] = right[A,B,Void](p)
+    val l: P[Initial \/ A, Initial \/ B] = right[A,B,Initial](p)
 
     //           dimap(lzero, lzeror)
     // P[A,B] =============================> P[0 + A, 0 + B]
-    val r: P[Void \/ A, Void \/ B] = dimap[Void \/ A, Void \/ B, A, B](p)(λ, λ_inv)
+    val r: P[Initial \/ A, Initial \/ B] = dimap[Initial \/ A, Initial \/ B, A, B](p)(λ, λ_inv)
 
     l == r
   }

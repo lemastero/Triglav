@@ -1,7 +1,7 @@
 package Triglav.monoidal1
 
+import Triglav.cat1.CategoryInstances.TyFun1Cat.Initial
 import Triglav.monoidal1.MonoidalCategoryInstances.{Function1EitherMc, TupleMc}
-import Triglav.face0.Void
 
 trait BraidedMonoidalCategory[:=>[_,_],⊗[+_,+_], I]
   extends MonoidalCategory[:=>,⊗, I] {
@@ -36,8 +36,8 @@ trait BraidedMonoidalCategoryLaws[:=>[_,_],⊗[+_,+_], I]
 }
 
 object BraidedMonoidalCategoryInstances {
-  val productBraidedMonoidalCategory: BraidedMonoidalCategory[Function1,Either,Void] =
-    new BraidedMonoidalCategory[Function1,Either,Void]
+  val productBraidedMonoidalCategory: BraidedMonoidalCategory[Function1,Either,Initial] =
+    new BraidedMonoidalCategory[Function1,Either,Initial]
       with Function1EitherMc {
 
       def braiding[A,B](a: Either[A,B]): Either[B,A] = a.swap

@@ -13,15 +13,22 @@ object ProfunctorOptics {
 
   // adapterC2P:: Adapter a b s t -> AdapterP a b s t
   // adapterC2P (Adapter o i) = dimap o i
-  def isoC2P[S,T,A,B]: Adapter[S,T,A,B] => AdapterP[S,T,A,B] = iso => new AdapterP[S,T,A,B] {
+  def adapterC2P[S,T,A,B]: Adapter[S,T,A,B] => AdapterP[S,T,A,B] = iso => new AdapterP[S,T,A,B] {
     override def apply[P[-_,+_]](implicit PP: Profunctor[P]): Optics[P,S,T,A,B] =
       (pab: P[A,B]) => PP.dimap(pab)(iso.from, iso.to)
   }
 
   // Profunctor Adapter
-//  def AdapterProfunctor[X,Y] = new Profunctor[Adapter[X,Y,*,*]] {
-//    override def dimap[S, T, A, B](pab: Adapter[X, Y, A, B])(sa: S => A, bt: B => T): Adapter[X, Y, S, T] = ???
-//  }
+  def AdapterProfunctor[X,Y] = {
+    type ProfAdapter[-S,+T] = Adapter[S,T,X,Y]
+    new Profunctor[ProfAdapter] {
+      override def dimap[S,T,A,B](
+        pab: Adapter[A,B,X,Y])(
+        sa: S => A,
+        bt: B => T): Adapter[S,T,X,Y] =
+          Adapter(sa andThen pab.from, pab.to andThen bt)
+    }
+  }
 
   // adapterP2C :: AdapterP a b s t -> Adapter a b s t
   // adapterP2C l = l (Adapter id id)

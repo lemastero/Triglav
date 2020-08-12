@@ -2,8 +2,8 @@ package Triglav.monoidal1
 
 import Triglav.cat1.Category
 import Triglav.face2.{Bifunctor, BifunctorInstances}
-import Triglav.cat1.CategoryInstances.Function1Cat
-import Triglav.cat1.CategoryInstances.TyFun1Cat.Initial
+import Triglav.cat1.Cat1Instances.Function1Cat
+import Triglav.cat1.Cat1Instances.TyFun1Cat.Initial.Initial
 
 /**
  * Monoidal Categories based on Category of Scala types and functions

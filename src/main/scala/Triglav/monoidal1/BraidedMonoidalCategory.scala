@@ -1,6 +1,6 @@
 package Triglav.monoidal1
 
-import Triglav.cat1.CategoryInstances.TyFun1Cat.Initial
+import Triglav.cat1.Cat1Instances.TyFun1Cat.Initial.Initial
 import Triglav.monoidal1.MonoidalCategoryInstances.{Function1EitherMc, TupleMc}
 
 trait BraidedMonoidalCategory[:=>[_,_],⊗[+_,+_], I]

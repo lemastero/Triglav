@@ -100,7 +100,7 @@ object Limit {
    *        \/
    * A ---> C
    */
-  abstract class Pullback[A,B,C](val f: A => C, val g: B => C) extends Limit {
+  abstract class Pullback[A,B,+C](val f: A => C, val g: B => C) extends Limit {
     type U
     def q: U => A
     def p: U => B
@@ -116,7 +116,7 @@ object Limit {
    *   --->
    * A ---> B
    */
-  abstract class Equalizer[X,Y](val f: X => Y, val g: X => Y) extends Limit {
+  abstract class Equalizer[X,+Y](val f: X => Y, val g: X => Y) extends Limit {
     type E
     def eq: E => X
 

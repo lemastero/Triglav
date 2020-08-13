@@ -16,16 +16,16 @@ object Colimit {
     def absurd[A]: Initial => A
   }
 
-  abstract class PushOut[A,B,C](val f: C => A, val g: C => B) extends Limit {
+  abstract class PushOut[A,B,-C](val f: C => A, val g: C => B) extends Limit {
     type U
     def q: A => U
-    def p: B => C
+    def p: B => U
 
     def inPushOut(c: C): Boolean =
       (f andThen q)(c) == (g andThen p)(c)
   }
 
-  abstract class CoEqualizer[X,Y](val f: X => Y, val g: X => Y) extends Limit {
+  abstract class CoEqualizer[-X,Y](val f: X => Y, val g: X => Y) extends Limit {
     type E
     def eq: Y => E
 

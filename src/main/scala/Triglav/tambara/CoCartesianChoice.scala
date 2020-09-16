@@ -1,7 +1,7 @@
 package Triglav.tambara
 
 import Triglav.face2.{Profunctor, ProfunctorLaws}
-import Triglav.incarnations.EitherInc.\/
+import Triglav.instances.EitherInc.\/
 import Triglav.cat1.Cat1Instances.TyFun1Cat.Initial.Initial
 import Triglav.monoidal1.MonoidalCategoryInstances.coproductMonCat.{α, α_inv, λ, λ_inv}
 

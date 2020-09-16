@@ -1,4 +1,4 @@
-package Triglav.incarnations
+package Triglav.instances
 
 import Triglav.face2.Profunctor
 import Triglav.tambara.CartesianStrong

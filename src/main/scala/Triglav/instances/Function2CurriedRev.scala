@@ -1,4 +1,4 @@
-package Triglav.incarnations
+package Triglav.instances
 
 import Triglav.face3.Trifunctor
 

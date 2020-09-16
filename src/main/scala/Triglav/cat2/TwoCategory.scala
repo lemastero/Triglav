@@ -3,6 +3,8 @@ package Triglav.cat2
 trait TwoCategory[OneCell[_[_],_[_]]] {
   def id[Obj[_]]: OneCell[Obj,Obj]
   def compose[ObA[_],ObB[_],ObC[_]](f: OneCell[ObB,ObC])(g: OneCell[ObA,ObB]): OneCell[ObA,ObC]
+
+  type TwoCell[F[_],G[_]] = OneCell[F,G] => OneCell[F,G]
 }
 
 trait TwoCategoryLaws[OneCell[_[_],_[_]]] extends TwoCategory[OneCell] {

@@ -6,19 +6,38 @@ version := "0.0.1"
 
 scalaVersion := "2.13.3"
 
-val zioVersion = "1.0.0"
+resolvers += Resolver.sonatypeRepo("snapshots")
+
+lazy val catsVersion = "2.2.0"
+lazy val catsMtlVersion = "1.0.0"
+lazy val scalaTestPlusVersion = "3.1.0.0-RC2"
+lazy val scalacheckVersion = "1.14.3"
+lazy val zioVersion = "1.0.0"
+lazy val silencerVersion = "1.7.1"
 
 libraryDependencies ++= Seq(
   "com.chuusai" %% "shapeless"    % "2.3.3",
+
+  // cats
+  "org.typelevel" %% "cats-core" % catsVersion withSources(),
+  "org.typelevel" %% "cats-free" % catsVersion withSources(),
+  "org.typelevel" %% "cats-laws" % catsVersion withSources(),
+  "org.typelevel" %% "alleycats-core" % catsVersion withSources(),
+  "org.typelevel" %% "cats-mtl" % catsMtlVersion withSources(),
+  "org.typelevel" %% "cats-mtl-laws" % catsMtlVersion withSources(),
+  "org.typelevel" %% "cats-effect" % "2.2.0" withSources(),
+
+  "org.scalaz"    %% "scalaz-core" % "7.3.2" withSources(),
+
   "dev.zio"     %% "zio"          % zioVersion,
+  "dev.zio"     %% "zio-prelude"  % "0.0.0+271-9bbfa4fd-SNAPSHOT" withSources(),
   "dev.zio"     %% "zio-test"     % zioVersion % Test,
-  "dev.zio"     %% "zio-test-sbt" % zioVersion % Test
+  "dev.zio"     %% "zio-test-sbt" % zioVersion % Test,
+
+  compilerPlugin("com.github.ghik" % "silencer-plugin" % silencerVersion cross CrossVersion.full),
+  "com.github.ghik" % "silencer-lib" % silencerVersion % Provided cross CrossVersion.full
 )
 
 addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.0" cross CrossVersion.full)
 
 testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework")
-
-scalacOptions ++= Seq(
-  "-encoding", "UTF-8"
-)

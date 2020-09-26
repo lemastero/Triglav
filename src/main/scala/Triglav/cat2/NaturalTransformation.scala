@@ -8,25 +8,28 @@ abstract class ~>[F[_], G[_]] { self =>
   def apply[A](fa: F[A]): G[A]
 
   def compose[H[_]](other: H ~> F): H ~> G =
-    λ[H ~> G]( fa => self(other(fa)) )
+    λ[H ~> G](fa => self(other(fa)))
 
   def andThen[H[_]](other: G ~> H): F ~> H =
-    λ[F ~> H]( fa => other(self(fa)) )
+    λ[F ~> H](fa => other(self(fa)))
 }
 
-case class IdNat[F[_]]() extends ~>[F,F] {
+case class IdNat[F[_]]() extends ~>[F, F] {
   def apply[A](fa: F[A]): F[A] = fa
 }
 
 object IdNat {
   // you could express idnetity natural transformation as function
   def IdentityNat[F[_]]: F ~> F =
-    λ[F ~> F]( fa => identity(fa) )
+    λ[F ~> F](fa => identity(fa))
 }
 
-trait NaturalTransformationLaws[F[_], G[_]] extends ~>[F,G] {
+trait NaturalTransformationLaws[F[_], G[_]] extends ~>[F, G] {
 
-  def naturalitySquare[A,B](fa: F[A], ff: F~>G, g: A => B)(implicit FF: Functor[F], FG: Functor[G]): Boolean = {
+  def naturalitySquare[A, B](fa: F[A], ff: F ~> G, g: A => B)(implicit
+      FF: Functor[F],
+      FG: Functor[G]
+  ): Boolean = {
     val v1: G[A] = ff(fa)
     val v2: G[B] = FG.map(v1)(g)
 

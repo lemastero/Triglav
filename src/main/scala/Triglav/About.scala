@@ -137,7 +137,7 @@ trait TriJoker[F[_, _, _]] {
 trait TriBiff[F[_, _, _]] extends TriClown[F] with TriJoker[F] {
 
   def bimap[E, A, R, AA, RR](
-    fa: F[E, A, R]
+      fa: F[E, A, R]
   )(g: A => AA, h: R => RR): F[E, AA, RR]
 }
 
@@ -146,21 +146,21 @@ trait TriBiff[F[_, _, _]] extends TriClown[F] with TriJoker[F] {
 trait TriProfJoker[F[_, _, _]] extends TriBard[F] with TriJoker[F] {
 
   def dimap[E, A, R, EE, RR](
-    fa: F[E, A, R]
+      fa: F[E, A, R]
   )(f: EE => E, h: R => RR): F[EE, A, RR]
 }
 
 trait TriProfClown[F[_, _, _]] extends TriBard[F] with TriClown[F] {
 
   def dimapLeft[E, A, R, EE, AA](
-    fa: F[E, A, R]
+      fa: F[E, A, R]
   )(f: EE => E, g: A => AA): F[EE, AA, R]
 }
 
 // and final abstraction FunTrio
 
 trait FunTrio[F[_, _, _]]
-  extends TriBard[F]
+    extends TriBard[F]
     with TriClown[F]
     with TriJoker[F]
     with TriBiff[F]
@@ -168,7 +168,7 @@ trait FunTrio[F[_, _, _]]
     with TriProfJoker[F] {
 
   def timap[E, A, R, EE, AA, RR](
-    fa: F[E, A, R]
+      fa: F[E, A, R]
   )(f: EE => E, g: A => AA, h: R => RR): F[EE, AA, RR]
 }
 
@@ -214,4 +214,3 @@ trait Contravariant[F[_]] extends ContravariantDi[F[_, Nothing]]{
   override def contramap[A,AA](fa: F[A])(f: AA => A): F[AA]
 }
  */
-

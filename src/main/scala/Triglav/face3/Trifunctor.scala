@@ -1,14 +1,16 @@
 package Triglav.face3
 
-trait Trifunctor[F[-_,+_,+_]]
-  extends Bard[F] with Clown[F] with Joker[F]
+trait Trifunctor[F[-_, +_, +_]]
+    extends Bard[F]
+    with Clown[F]
+    with Joker[F]
     with Biffunctor[F]
-    with ClownProfunctor[F] with JokerProfunctor[F] {
+    with ClownProfunctor[F]
+    with JokerProfunctor[F] {
 
-  def timap[E,A,R,EE,AA,RR](fa: F[E,A,R])(
-    f: EE => E,
-    g: A => AA,
-    h: R => RR): F[EE,AA,RR]
+  def timap[E, A, R, EE, AA, RR](
+      fa: F[E, A, R]
+  )(f: EE => E, g: A => AA, h: R => RR): F[EE, AA, RR]
 
   // derived methods
   override def contramap[E, A, R, EE](fa: F[E, A, R])(f: EE => E): F[EE, A, R] =
@@ -20,18 +22,24 @@ trait Trifunctor[F[-_,+_,+_]]
   override def map[E, A, R, RR](fa: F[E, A, R])(h: R => RR): F[E, A, RR] =
     timap(fa)(identity[E], identity[A], h)
 
-  override def bimap[E, A, R, AA, RR](fa: F[E, A, R])(g: A => AA, h: R => RR): F[E, AA, RR] =
+  override def bimap[E, A, R, AA, RR](
+      fa: F[E, A, R]
+  )(g: A => AA, h: R => RR): F[E, AA, RR] =
     timap(fa)(identity[E], g, h)
 
-  override def dimapLeft[E, A, R, EE, AA](fa: F[E, A, R])(f: EE => E, g: A => AA): F[EE, AA, R] =
+  override def dimapLeft[E, A, R, EE, AA](
+      fa: F[E, A, R]
+  )(f: EE => E, g: A => AA): F[EE, AA, R] =
     timap(fa)(f, g, identity[R])
 
-  override def dimap[E, A, R, EE, RR](fa: F[E, A, R])(f: EE => E, h: R => RR): F[EE, A, RR] =
+  override def dimap[E, A, R, EE, RR](
+      fa: F[E, A, R]
+  )(f: EE => E, h: R => RR): F[EE, A, RR] =
     timap(fa)(f, identity[A], h)
 }
 
-trait ProfunctorLaws[P[-_,+_,+_]]
-  extends JokerLaws[P]
+trait ProfunctorLaws[P[-_, +_, +_]]
+    extends JokerLaws[P]
     with BardLaws[P]
     with ClownLaws[P]
     with Trifunctor[P] {
@@ -44,7 +52,15 @@ trait ProfunctorLaws[P[-_,+_,+_]]
   }
 
   // timap (f . g) (h . i) == dimap g h . dimap f i
-  def timapComposition[A, B, C, A2, A3, B2, B3, C2, C3](pad: P[A, B, C], g: A3 => A2, f: A2 => A, i: B => B2, h: B2 => B3, k: C => C2, m: C2 => C3): Boolean = {
+  def timapComposition[A, B, C, A2, A3, B2, B3, C2, C3](
+      pad: P[A, B, C],
+      g: A3 => A2,
+      f: A2 => A,
+      i: B => B2,
+      h: B2 => B3,
+      k: C => C2,
+      m: C2 => C3
+  ): Boolean = {
     //          timap A2=>A B=>B2 C=>C2
     // P[A,B] ==========================> F[A2,B2]
     val p2: P[A2, B2, C2] = timap(pad)(f, i, k)
@@ -63,7 +79,12 @@ trait ProfunctorLaws[P[-_,+_,+_]]
   }
 
   // dimap f g == contramap (map g) f
-  def timapCoherentWithMapAndContramap[A, B, C, A2, B2, C2](pad: P[A, B, C], f: A2 => A, g: B => B2, h: C => C2): Boolean = {
+  def timapCoherentWithMapAndContramap[A, B, C, A2, B2, C2](
+      pad: P[A, B, C],
+      f: A2 => A,
+      g: B => B2,
+      h: C => C2
+  ): Boolean = {
     //          dimap A2=>A B=>B2
     // P[A,B] ===================> F[A2,B2]
     val l: P[A2, B2, C2] = timap(pad)(f, g, h)

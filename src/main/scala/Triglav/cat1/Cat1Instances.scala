@@ -7,9 +7,9 @@ object Cat1Instances {
   }
 
   object Product extends Limit.Product {
-    type Product[+A,+B] = (A,B)
-    def fst[A,B]: Product[A,B] => A = _._1
-    def snd[A,B]: Product[A,B] => B = _._2
+    type Product[+A, +B] = (A, B)
+    def fst[A, B]: Product[A, B] => A = _._1
+    def snd[A, B]: Product[A, B] => B = _._2
   }
 
   object TerminalObject extends Limit.TerminalObject {
@@ -23,14 +23,14 @@ object Cat1Instances {
   }
 
   object Coproduct extends Colimit.CoProduct {
-    type Coproduct[+A,+B] = Either[A,B]
-    def left[A,B]: A => Coproduct[A,B] = Left(_)
-    def right[A,B]: B => Coproduct[A,B] = Right(_)
+    type Coproduct[+A, +B] = Either[A, B]
+    def left[A, B]: A => Coproduct[A, B] = Left(_)
+    def right[A, B]: B => Coproduct[A, B] = Right(_)
   }
 
   trait Function1Cat
-    extends FinitelyCompleteCategory[Function1]
-    with FinitelyCoCompleteCategory[Function1] {
+      extends FinitelyCompleteCategory[Function1]
+      with FinitelyCoCompleteCategory[Function1] {
 
     def id[A]: A => A = identity[A]
     def compose[A, B, C](f: B => C)(g: A => B): A => C = g andThen f

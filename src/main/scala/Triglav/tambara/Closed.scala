@@ -2,13 +2,11 @@ package Triglav.tambara
 
 import Triglav.face2.{Profunctor, ProfunctorLaws}
 
-trait Closed[=>:[-_,+_]] extends Profunctor[=>:] { // TambaraModule C => _
-  def closed[A,B,C]: A=>:B => (C=>A) =>: (C => B)
+trait Closed[=>:[-_, +_]] extends Profunctor[=>:] { // TambaraModule C => _
+  def closed[A, B, C]: A =>: B => (C => A) =>: (C => B)
 }
 
-trait ClosedLaws[P[-_,+_]]
-  extends Closed[P]
-    with ProfunctorLaws[P] {
+trait ClosedLaws[P[-_, +_]] extends Closed[P] with ProfunctorLaws[P] {
 
   // TODO
 

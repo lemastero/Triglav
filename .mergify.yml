@@ -11,7 +11,7 @@ pull_request_rules:
     conditions:
       - base=master
       - author=scala-steward
-      - status-success=Scala CI / build
+      - status-success=Scala CI - Pull Request
     actions:
       merge:
         method: merge

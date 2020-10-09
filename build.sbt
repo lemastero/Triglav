@@ -12,7 +12,7 @@ lazy val catsVersion = "2.2.0"
 lazy val catsMtlVersion = "1.0.0"
 lazy val scalaTestPlusVersion = "3.1.0.0-RC2"
 lazy val scalacheckVersion = "1.14.3"
-lazy val zioVersion = "1.0.2"
+lazy val zioVersion = "1.0.3"
 lazy val silencerVersion = "1.7.1"
 
 libraryDependencies ++= Seq(

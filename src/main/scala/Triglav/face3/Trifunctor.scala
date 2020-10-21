@@ -1,75 +1,74 @@
 package Triglav.face3
 
-trait Trifunctor[F[-_,+_,+_]]
-  extends Bard[F] with Clown[F] with Joker[F]
-    with Biffunctor[F]
-    with ClownProfunctor[F] with JokerProfunctor[F] {
+trait Trifunctor[T[+_,+_,+_]]
+  extends FirstFunctor[T] with LeftFunctor[T] with RightFunctor[T]
+  with LeftBifunctor[T] with RightBifunctor[T] {
 
-  def timap[E,A,R,EE,AA,RR](fa: F[E,A,R])(
-    f: EE => E,
+  def trimap[E,A,R,EE,AA,RR](fa: T[E,A,R])(
+    f: E => EE,
     g: A => AA,
-    h: R => RR): F[EE,AA,RR]
+    h: R => RR): T[EE,AA,RR]
 
   // derived methods
-  override def contramap[E, A, R, EE](fa: F[E, A, R])(f: EE => E): F[EE, A, R] =
-    timap(fa)(f, identity[A], identity[R])
 
-  override def mapLeft[E, A, R, AA](fa: F[E, A, R])(g: A => AA): F[E, AA, R] =
-    timap(fa)(identity[E], g, identity[R])
+  override def bimap[E, A, R, AA, RR](fa: T[E, A, R])(g: A => AA, h: R => RR): T[E, AA, RR] =
+    trimap(fa)(identity[E], g, h)
 
-  override def map[E, A, R, RR](fa: F[E, A, R])(h: R => RR): F[E, A, RR] =
-    timap(fa)(identity[E], identity[A], h)
+  override def bimapLeft[E, A, R, EE, AA](fa: T[E, A, R])(f: E => EE, g: A => AA): T[EE, AA, R] =
+    trimap(fa)(f, g, identity[R])
 
-  override def bimap[E, A, R, AA, RR](fa: F[E, A, R])(g: A => AA, h: R => RR): F[E, AA, RR] =
-    timap(fa)(identity[E], g, h)
+  override def mapFirst[E, A, R, EE](fa: T[E, A, R])(f: E => EE): T[EE, A, R] =
+    trimap(fa)(f, identity[A], identity[R])
 
-  override def dimapLeft[E, A, R, EE, AA](fa: F[E, A, R])(f: EE => E, g: A => AA): F[EE, AA, R] =
-    timap(fa)(f, g, identity[R])
+  override def mapLeft[E, A, R, AA](fa: T[E, A, R])(g: A => AA): T[E, AA, R] =
+    trimap(fa)(identity[E], g, identity[R])
 
-  override def dimap[E, A, R, EE, RR](fa: F[E, A, R])(f: EE => E, h: R => RR): F[EE, A, RR] =
-    timap(fa)(f, identity[A], h)
+  override def map[E, A, R, RR](fa: T[E, A, R])(h: R => RR): T[E, A, RR] =
+    trimap(fa)(identity[E], identity[A], h)
 }
 
-trait ProfunctorLaws[P[-_,+_,+_]]
-  extends JokerLaws[P]
-    with BardLaws[P]
-    with ClownLaws[P]
-    with Trifunctor[P] {
+trait TrifunctorLaws[T[+_,+_,+_]]
+  extends FirstFunctorLaws[T]
+    with LeftFunctorLaws[T]
+    with RightFunctorLaws[T]
+    with LeftBifunctorLaws[T]
+    with RightBifunctorLaws[T]
+    with Trifunctor[T] {
 
-  // dimap id id == id
-  def timapIdentity[A, B, C](p: P[A, B, C]): Boolean = {
-    //          dimap(id, id, id)
+  // trimap id id id == id
+  def trimapIdentity[A, B, C](p: T[A, B, C]): Boolean = {
+    //          trimap(id, id, id)
     // P[A,B,C] ================> P[A,B,C]
-    timap(p)(identity[A], identity[B], identity[C]) == p
+    trimap(p)(identity[A], identity[B], identity[C]) == p
   }
 
-  // timap (f . g) (h . i) == dimap g h . dimap f i
-  def timapComposition[A, B, C, A2, A3, B2, B3, C2, C3](pad: P[A, B, C], g: A3 => A2, f: A2 => A, i: B => B2, h: B2 => B3, k: C => C2, m: C2 => C3): Boolean = {
-    //          timap A2=>A B=>B2 C=>C2
-    // P[A,B] ==========================> F[A2,B2]
-    val p2: P[A2, B2, C2] = timap(pad)(f, i, k)
-    //          timap A3=>A2 B2=>B3
+  // trimap f, i, k andThen trimap (g, h, m) == trimap g . f , h . i, m . k
+  def trimapComposition[A, B, C, A2, A3, B2, B3, C2, C3](pad: T[A, B, C], f: A => A2, g: A2 => A3, i: B => B2, h: B2 => B3, k: C => C2, m: C2 => C3): Boolean = {
+    //          trimap A=>A2 B=>B2 C=>C2
+    // P[A,B,C] ==========================> F[A2,B2,C2]
+    val p2: T[A2, B2, C2] = trimap(pad)(f, i, k)
+    //          trimap A3=>A2 B2=>B3
     // P[A2,B2] ====================> P[A3,B3]
-    val l: P[A3, B3, C3] = timap(p2)(g, h, m)
+    val l: T[A3, B3, C3] = trimap(p2)(g, h, m)
 
-    val fg: A3 => A = f compose g
+    val gf: A => A3 = g compose f
     val hi: B => B3 = h compose i
     val mk: C => C3 = m compose k
-    //         timap A3=>A B=>B3
+    //         trimap A3=>A B=>B3
     // P[A,B] ===================> P[A3,B3]
-    val r: P[A3, B3, C3] = timap(pad)(fg, hi, mk)
+    val r: T[A3, B3, C3] = trimap(pad)(gf, hi, mk)
 
     l == r
   }
 
-  // dimap f g == contramap (map g) f
-  def timapCoherentWithMapAndContramap[A, B, C, A2, B2, C2](pad: P[A, B, C], f: A2 => A, g: B => B2, h: C => C2): Boolean = {
-    //          dimap A2=>A B=>B2
+  // trimap f g == (map h) andThen (mapFirst f) andThen (mapLeft g)
+  def trimapCoherentWithMapAndContramap[A, B, C, A2, B2, C2](pad: T[A, B, C], f: A => A2, g: B => B2, h: C => C2): Boolean = {
+    //          trimap A2=>A B=>B2
     // P[A,B] ===================> F[A2,B2]
-    val l: P[A2, B2, C2] = timap(pad)(f, g, h)
+    val l: T[A2, B2, C2] = trimap(pad)(f, g, h)
 
     val r1 = map(pad)(h)
-    val r2 = contramap(r1)(f)
+    val r2 = mapFirst(r1)(f)
     val r3 = mapLeft(r2)(g)
 
     l == r3

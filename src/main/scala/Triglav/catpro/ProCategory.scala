@@ -41,4 +41,3 @@ object ProCategoryInstances {
 
   val scalaTypeConstructorsAndNaturalTransf: ProCategory[~~>] = new DinatCat {}
 }
-

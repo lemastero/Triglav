@@ -1,10 +1,10 @@
 package Triglav.face3
 
-trait LeftFunctor[F[_,+_,_]] {
-  def mapLeft[E,A,R,AA](fa: F[E,A,R])(g: A => AA): F[E,AA,R]
+trait LeftFunctor[F[_, +_, _]] {
+  def mapLeft[E, A, R, AA](fa: F[E, A, R])(g: A => AA): F[E, AA, R]
 }
 
-trait LeftFunctorLaws[P[_,+_,_]] extends LeftFunctor[P] {
+trait LeftFunctorLaws[P[_, +_, _]] extends LeftFunctor[P] {
 
   // mapLeft id == id
   def mapLeftIdentity[A, B, C](p: P[A, B, C]): Boolean = {

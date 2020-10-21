@@ -1,23 +1,31 @@
 package Triglav.face3
 
-trait Zifunctor[F[-_,+_,+_]]
-  extends FirstContravariant[F] with LeftFunctor[F] with RightFunctor[F]
+trait Zifunctor[F[-_, +_, +_]]
+    extends FirstContravariant[F]
+    with LeftFunctor[F]
+    with RightFunctor[F]
     with RightBifunctor[F]
-    with LeftProfunctor[F] with RightProfunctor[F] {
+    with LeftProfunctor[F]
+    with RightProfunctor[F] {
 
-  def zimap[E,A,R,EE,AA,RR](fa: F[E,A,R])(
-    f: EE => E,
-    g: A => AA,
-    h: R => RR): F[EE,AA,RR]
+  def zimap[E, A, R, EE, AA, RR](
+      fa: F[E, A, R]
+  )(f: EE => E, g: A => AA, h: R => RR): F[EE, AA, RR]
 
   // derived methods
-  override def bimap[E, A, R, AA, RR](fa: F[E, A, R])(g: A => AA, h: R => RR): F[E, AA, RR] =
+  override def bimap[E, A, R, AA, RR](
+      fa: F[E, A, R]
+  )(g: A => AA, h: R => RR): F[E, AA, RR] =
     zimap(fa)(identity[E], g, h)
 
-  override def dimapLeft[E, A, R, EE, AA](fa: F[E, A, R])(f: EE => E, g: A => AA): F[EE, AA, R] =
+  override def dimapLeft[E, A, R, EE, AA](
+      fa: F[E, A, R]
+  )(f: EE => E, g: A => AA): F[EE, AA, R] =
     zimap(fa)(f, g, identity[R])
 
-  override def dimap[E, A, R, EE, RR](fa: F[E, A, R])(f: EE => E, h: R => RR): F[EE, A, RR] =
+  override def dimap[E, A, R, EE, RR](
+      fa: F[E, A, R]
+  )(f: EE => E, h: R => RR): F[EE, A, RR] =
     zimap(fa)(f, identity[A], h)
 
   override def contramap[E, A, R, EE](fa: F[E, A, R])(f: EE => E): F[EE, A, R] =
@@ -30,8 +38,8 @@ trait Zifunctor[F[-_,+_,+_]]
     zimap(fa)(identity[E], identity[A], h)
 }
 
-trait ZifunctorLaws[P[-_,+_,+_]]
-  extends RightFunctorLaws[P]
+trait ZifunctorLaws[P[-_, +_, +_]]
+    extends RightFunctorLaws[P]
     with FirstContravariantLaws[P]
     with LeftFunctorLaws[P]
     with Zifunctor[P] {
@@ -44,7 +52,15 @@ trait ZifunctorLaws[P[-_,+_,+_]]
   }
 
   // zimap (f . g) (h . i) == dimap g h . dimap f i
-  def zimapComposition[A, B, C, A2, A3, B2, B3, C2, C3](pad: P[A, B, C], g: A3 => A2, f: A2 => A, i: B => B2, h: B2 => B3, k: C => C2, m: C2 => C3): Boolean = {
+  def zimapComposition[A, B, C, A2, A3, B2, B3, C2, C3](
+      pad: P[A, B, C],
+      g: A3 => A2,
+      f: A2 => A,
+      i: B => B2,
+      h: B2 => B3,
+      k: C => C2,
+      m: C2 => C3
+  ): Boolean = {
     //          zimap A2=>A B=>B2 C=>C2
     // P[A,B] ==========================> F[A2,B2]
     val p2: P[A2, B2, C2] = zimap(pad)(f, i, k)
@@ -63,7 +79,12 @@ trait ZifunctorLaws[P[-_,+_,+_]]
   }
 
   // dimap f g == contramap (map g) f
-  def zimapCoherentWithMapAndContramap[A, B, C, A2, B2, C2](pad: P[A, B, C], f: A2 => A, g: B => B2, h: C => C2): Boolean = {
+  def zimapCoherentWithMapAndContramap[A, B, C, A2, B2, C2](
+      pad: P[A, B, C],
+      f: A2 => A,
+      g: B => B2,
+      h: C => C2
+  ): Boolean = {
     //          dimap A2=>A B=>B2
     // P[A,B] ===================> F[A2,B2]
     val l: P[A2, B2, C2] = zimap(pad)(f, g, h)

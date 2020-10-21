@@ -8,7 +8,9 @@ object Function2CurriedRev {
 
   def curriedRevTriglav: Zifunctor[CurriedRev] = new Zifunctor[CurriedRev] {
 
-    override def zimap[B,C,A,BB,CC,AA](fa: (C => B) => A)(f: BB => B, g: C => CC, h: A => AA): (CC => BB) => AA =
+    override def zimap[B, C, A, BB, CC, AA](
+        fa: (C => B) => A
+    )(f: BB => B, g: C => CC, h: A => AA): (CC => BB) => AA =
       k => h(fa(g andThen k andThen f))
 
     override def dimapLeft[B, C, A, BB, CC](

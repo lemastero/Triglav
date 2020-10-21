@@ -1,10 +1,10 @@
 package Triglav.face3
 
-trait LeftBifunctor[F[+_,+_,_]]
-  extends FirstFunctor[F]
-  with LeftFunctor[F] {
+trait LeftBifunctor[F[+_, +_, _]] extends FirstFunctor[F] with LeftFunctor[F] {
 
-  def bimapLeft[E, A, R, EE, AA](fa: F[E, A, R])(f: E => EE, g: A => AA): F[EE, AA, R]
+  def bimapLeft[E, A, R, EE, AA](
+      fa: F[E, A, R]
+  )(f: E => EE, g: A => AA): F[EE, AA, R]
 
   // derived methods
   override def mapFirst[E, A, R, EE](fa: F[E, A, R])(f: E => EE): F[EE, A, R] =
@@ -14,8 +14,8 @@ trait LeftBifunctor[F[+_,+_,_]]
     bimapLeft(fa)(identity[E], g)
 }
 
-trait LeftBifunctorLaws[F[+_,+_,_]]
-  extends FirstFunctorLaws[F]
+trait LeftBifunctorLaws[F[+_, +_, _]]
+    extends FirstFunctorLaws[F]
     with LeftFunctorLaws[F] {
   // TODO
 }

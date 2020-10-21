@@ -5,8 +5,7 @@ trait Limit
 /** Limits are unique up to isomorphism */
 object Limit {
 
-  /**
-    * Categorical Product
+  /** Categorical Product
     *
     * Product is limit with diagram containing 2 points and no morphisms.
     */
@@ -16,8 +15,7 @@ object Limit {
     def snd[A, B]: Product[A, B] => B
   }
 
-  /**
-    * Terminal object (final object)
+  /** Terminal object (final object)
     *
     * Given C be a Category. Terminal object in C is object T
     * such that (universal property) given any other object X
@@ -44,8 +42,7 @@ object Limit {
     def unit[A]: A => Terminal
   }
 
-  /**
-    * Given: object C and morphisms: A => C and B => C
+  /** Given: object C and morphisms: A => C and B => C
     *
     *           B
     *           |
@@ -110,8 +107,7 @@ object Limit {
       (q andThen f)(u) == (p andThen g)(u)
   }
 
-  /**
-    * Equalizer is a limit where diagram has 2 objects A, B
+  /** Equalizer is a limit where diagram has 2 objects A, B
     * and 2 morphisms A => B
     *
     *   --->

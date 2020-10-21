@@ -1,10 +1,10 @@
 package Triglav.face3
 
-trait RightFunctor[F[_,_,+_]] {
-  def map[E,A,R,RR](fa: F[E,A,R])(h: R => RR): F[E,A,RR]
+trait RightFunctor[F[_, _, +_]] {
+  def map[E, A, R, RR](fa: F[E, A, R])(h: R => RR): F[E, A, RR]
 }
 
-trait RightFunctorLaws[P[_,_,+_]] extends RightFunctor[P] {
+trait RightFunctorLaws[P[_, _, +_]] extends RightFunctor[P] {
 
   // map id == id
   def mapIdentity[A, B, C](p: P[A, B, C]): Boolean = {

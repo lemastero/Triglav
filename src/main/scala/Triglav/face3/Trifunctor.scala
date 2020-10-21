@@ -1,20 +1,26 @@
 package Triglav.face3
 
-trait Trifunctor[T[+_,+_,+_]]
-  extends FirstFunctor[T] with LeftFunctor[T] with RightFunctor[T]
-  with LeftBifunctor[T] with RightBifunctor[T] {
+trait Trifunctor[T[+_, +_, +_]]
+    extends FirstFunctor[T]
+    with LeftFunctor[T]
+    with RightFunctor[T]
+    with LeftBifunctor[T]
+    with RightBifunctor[T] {
 
-  def trimap[E,A,R,EE,AA,RR](fa: T[E,A,R])(
-    f: E => EE,
-    g: A => AA,
-    h: R => RR): T[EE,AA,RR]
+  def trimap[E, A, R, EE, AA, RR](
+      fa: T[E, A, R]
+  )(f: E => EE, g: A => AA, h: R => RR): T[EE, AA, RR]
 
   // derived methods
 
-  override def bimap[E, A, R, AA, RR](fa: T[E, A, R])(g: A => AA, h: R => RR): T[E, AA, RR] =
+  override def bimap[E, A, R, AA, RR](
+      fa: T[E, A, R]
+  )(g: A => AA, h: R => RR): T[E, AA, RR] =
     trimap(fa)(identity[E], g, h)
 
-  override def bimapLeft[E, A, R, EE, AA](fa: T[E, A, R])(f: E => EE, g: A => AA): T[EE, AA, R] =
+  override def bimapLeft[E, A, R, EE, AA](
+      fa: T[E, A, R]
+  )(f: E => EE, g: A => AA): T[EE, AA, R] =
     trimap(fa)(f, g, identity[R])
 
   override def mapFirst[E, A, R, EE](fa: T[E, A, R])(f: E => EE): T[EE, A, R] =
@@ -27,8 +33,8 @@ trait Trifunctor[T[+_,+_,+_]]
     trimap(fa)(identity[E], identity[A], h)
 }
 
-trait TrifunctorLaws[T[+_,+_,+_]]
-  extends FirstFunctorLaws[T]
+trait TrifunctorLaws[T[+_, +_, +_]]
+    extends FirstFunctorLaws[T]
     with LeftFunctorLaws[T]
     with RightFunctorLaws[T]
     with LeftBifunctorLaws[T]
@@ -43,7 +49,15 @@ trait TrifunctorLaws[T[+_,+_,+_]]
   }
 
   // trimap f, i, k andThen trimap (g, h, m) == trimap g . f , h . i, m . k
-  def trimapComposition[A, B, C, A2, A3, B2, B3, C2, C3](pad: T[A, B, C], f: A => A2, g: A2 => A3, i: B => B2, h: B2 => B3, k: C => C2, m: C2 => C3): Boolean = {
+  def trimapComposition[A, B, C, A2, A3, B2, B3, C2, C3](
+      pad: T[A, B, C],
+      f: A => A2,
+      g: A2 => A3,
+      i: B => B2,
+      h: B2 => B3,
+      k: C => C2,
+      m: C2 => C3
+  ): Boolean = {
     //          trimap A=>A2 B=>B2 C=>C2
     // P[A,B,C] ==========================> F[A2,B2,C2]
     val p2: T[A2, B2, C2] = trimap(pad)(f, i, k)
@@ -62,7 +76,12 @@ trait TrifunctorLaws[T[+_,+_,+_]]
   }
 
   // trimap f g == (map h) andThen (mapFirst f) andThen (mapLeft g)
-  def trimapCoherentWithMapAndContramap[A, B, C, A2, B2, C2](pad: T[A, B, C], f: A => A2, g: B => B2, h: C => C2): Boolean = {
+  def trimapCoherentWithMapAndContramap[A, B, C, A2, B2, C2](
+      pad: T[A, B, C],
+      f: A => A2,
+      g: B => B2,
+      h: C => C2
+  ): Boolean = {
     //          trimap A2=>A B=>B2
     // P[A,B] ===================> F[A2,B2]
     val l: T[A2, B2, C2] = trimap(pad)(f, g, h)

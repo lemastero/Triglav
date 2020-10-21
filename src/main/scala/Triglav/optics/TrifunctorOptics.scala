@@ -10,10 +10,9 @@ object TrifunctorOptics {
     type TriOptic[-S, +T, +A] = Optics[P, S, T, A, B]
 
     new Zifunctor[TriOptic] {
-      override def zimap[E,A,R,EE,AA,RR](fa: P[R,B] => P[E,A])(
-        f: EE => E,
-        g: A => AA,
-        h: R => RR): P[RR,B] => P[EE,AA] =
+      override def zimap[E, A, R, EE, AA, RR](
+          fa: P[R, B] => P[E, A]
+      )(f: EE => E, g: A => AA, h: R => RR): P[RR, B] => P[EE, AA] =
         rrb => {
           val r1: P[R, B] = PP.contramap(rrb)(h)
           val r2: P[E, A] = fa(r1)
@@ -26,10 +25,9 @@ object TrifunctorOptics {
     type TriOptic[-S, -B, +T] = Optics[P, S, T, A, B]
 
     new Fnfunctor[TriOptic] {
-      override def fnmap[E,A1,R,EE,AA,RR](fa: P[A,A1] => P[E,R])(
-        f: EE => E,
-        g: AA => A1,
-        h: R => RR): P[A,AA] => P[EE,RR] =
+      override def fnmap[E, A1, R, EE, AA, RR](
+          fa: P[A, A1] => P[E, R]
+      )(f: EE => E, g: AA => A1, h: R => RR): P[A, AA] => P[EE, RR] =
         a => {
           val r1: P[A, A1] = PP.map(a)(g)
           val r2: P[E, R] = fa(r1)

@@ -9,7 +9,9 @@ object NiFunctorInstancesZIO {
 
   implicit val ScheduleNifunctor: Fnfunctor[Schedule] =
     new Fnfunctor[Schedule] {
-      override def fnmap[E, A, R, EE, AA, RR](fa: Schedule[E, A, R])(f: EE => E, g: AA => A, h: R => RR): Schedule[EE, AA, RR] =
-        fa.dimap(g,h).provideSome(f)
+      override def fnmap[E, A, R, EE, AA, RR](
+          fa: Schedule[E, A, R]
+      )(f: EE => E, g: AA => A, h: R => RR): Schedule[EE, AA, RR] =
+        fa.dimap(g, h).provideSome(f)
     }
 }

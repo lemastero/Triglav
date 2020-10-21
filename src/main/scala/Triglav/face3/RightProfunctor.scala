@@ -1,10 +1,12 @@
 package Triglav.face3
 
-trait RightProfunctor[F[-_,_,+_]]
-  extends FirstContravariant[F]
-  with RightFunctor[F] {
+trait RightProfunctor[F[-_, _, +_]]
+    extends FirstContravariant[F]
+    with RightFunctor[F] {
 
-  def dimap[E,A,R,EE,RR](fa: F[E,A,R])(f: EE => E, h: R => RR): F[EE,A,RR]
+  def dimap[E, A, R, EE, RR](
+      fa: F[E, A, R]
+  )(f: EE => E, h: R => RR): F[EE, A, RR]
 
   // derived methods
 
@@ -15,10 +17,10 @@ trait RightProfunctor[F[-_,_,+_]]
     dimap(fa)(identity, h)
 }
 
-trait RightProfunctorLaws[F[-_,_,+_]]
-  extends FirstContravariantLaws[F]
-  with RightFunctorLaws[F]
-  with RightProfunctor[F] {
+trait RightProfunctorLaws[F[-_, _, +_]]
+    extends FirstContravariantLaws[F]
+    with RightFunctorLaws[F]
+    with RightProfunctor[F] {
 
   // TODO
 }

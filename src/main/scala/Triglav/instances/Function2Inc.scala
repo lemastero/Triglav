@@ -6,8 +6,11 @@ object Function2Inc {
 
   def function2Norne: Fnfunctor[Function2] = new Fnfunctor[Function2] {
 
-    override def fnmap[E,A,R,EE,AA,RR](fa: (E,A) => R)(f: EE => E, g: AA => A, h: R => RR): (EE,AA) => RR =
-      { case(ee,aa) => h(fa(f(ee),g(aa))) }
+    override def fnmap[E, A, R, EE, AA, RR](
+        fa: (E, A) => R
+    )(f: EE => E, g: AA => A, h: R => RR): (EE, AA) => RR = { case (ee, aa) =>
+      h(fa(f(ee), g(aa)))
+    }
 
     override def contramap[E, A, R, EE](fa: (E, A) => R)(
         f: EE => E

@@ -8,7 +8,7 @@ trait FirstContravariantLaws[P[-_,_,_]]
   extends FirstContravariant[P] {
 
   // contramap id == id
-  def contramapIdentity[A,B,C](p: P[A,B,C]): Boolean = {
+  def contramapIdentity[A, B, C](p: P[A, B, C]): Boolean = {
     //          contramap(id)
     // P[A,B] ================> P[A,B]
     contramap(p)(identity[A]) == p

@@ -5,8 +5,7 @@ import Triglav.face2.{Bifunctor, BifunctorInstances}
 import Triglav.cat1.Cat1Instances.Function1Cat
 import Triglav.cat1.Cat1Instances.TyFun1Cat.Initial.Initial
 
-/**
-  * Monoidal Categories based on Category of Scala types and functions
+/** Monoidal Categories based on Category of Scala types and functions
   *
   * Edward Kmett Discrimination is Wrong: Improving Productivity
   * http://yowconference.com.au/slides/yowlambdajam2015/Kmett-DiscriminationIsWrong.pdf

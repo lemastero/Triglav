@@ -1,14 +1,14 @@
 package Triglav.instances
 
-import Triglav.face3.Trifunctor
+import Triglav.face3.Zifunctor
 
 object Function2CurriedRev {
 
   type CurriedRev[-B, +C, +A] = (C => B) => A
 
-  def curriedRevTriglav: Trifunctor[CurriedRev] = new Trifunctor[CurriedRev] {
+  def curriedRevTriglav: Zifunctor[CurriedRev] = new Zifunctor[CurriedRev] {
 
-    override def timap[B, C, A, BB, CC, AA](
+    override def zimap[B, C, A, BB, CC, AA](
         fa: (C => B) => A
     )(f: BB => B, g: C => CC, h: A => AA): (CC => BB) => AA =
       k => h(fa(g andThen k andThen f))

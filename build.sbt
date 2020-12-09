@@ -30,7 +30,7 @@ libraryDependencies ++= Seq(
   "org.scalaz"    %% "scalaz-core" % "7.3.2" withSources(),
 
   "dev.zio"     %% "zio"          % zioVersion,
-  "dev.zio"     %% "zio-prelude"  % "0.0.0+271-9bbfa4fd-SNAPSHOT" withSources(),
+  "dev.zio"     %% "zio-prelude"  % "0.0.0+369-a72a24af-SNAPSHOT" withSources(),
   "dev.zio"     %% "zio-test"     % zioVersion % Test,
   "dev.zio"     %% "zio-test-sbt" % zioVersion % Test,
 

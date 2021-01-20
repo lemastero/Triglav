@@ -27,7 +27,7 @@ libraryDependencies ++= Seq(
   "org.typelevel" %% "cats-mtl-laws" % catsMtlVersion withSources(),
   "org.typelevel" %% "cats-effect" % "2.3.1" withSources(),
 
-  "org.scalaz"    %% "scalaz-core" % "7.3.2" withSources(),
+  "org.scalaz"    %% "scalaz-core" % "7.3.3" withSources(),
 
   "dev.zio"     %% "zio"          % zioVersion,
   "dev.zio"     %% "zio-prelude"  % "0.0.0+369-a72a24af-SNAPSHOT" withSources(),

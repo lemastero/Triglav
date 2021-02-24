@@ -8,12 +8,12 @@ scalaVersion := "2.13.3"
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 
-lazy val catsVersion = "2.3.1"
-lazy val catsMtlVersion = "1.1.1"
+lazy val catsVersion = "2.4.2"
+lazy val catsMtlVersion = "1.1.2"
 lazy val scalaTestPlusVersion = "3.1.0.0-RC2"
 lazy val scalacheckVersion = "1.14.3"
-lazy val zioVersion = "1.0.4-2"
-lazy val silencerVersion = "1.7.2"
+lazy val zioVersion = "1.0.4"
+lazy val silencerVersion = "1.7.3"
 
 libraryDependencies ++= Seq(
   "com.chuusai" %% "shapeless"    % "2.3.3",
@@ -25,7 +25,7 @@ libraryDependencies ++= Seq(
   "org.typelevel" %% "alleycats-core" % catsVersion withSources(),
   "org.typelevel" %% "cats-mtl" % catsMtlVersion withSources(),
   "org.typelevel" %% "cats-mtl-laws" % catsMtlVersion withSources(),
-  "org.typelevel" %% "cats-effect" % "2.3.1" withSources(),
+  "org.typelevel" %% "cats-effect" % "2.3.3" withSources(),
 
   "org.scalaz"    %% "scalaz-core" % "7.3.3" withSources(),
 

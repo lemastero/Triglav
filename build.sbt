@@ -38,6 +38,6 @@ libraryDependencies ++= Seq(
   "com.github.ghik" % "silencer-lib" % silencerVersion % Provided cross CrossVersion.full
 )
 
-addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.12.0" cross CrossVersion.full)
+addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.0" cross CrossVersion.full)
 
 testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework")

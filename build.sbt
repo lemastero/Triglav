@@ -16,7 +16,7 @@ lazy val zioVersion = "1.0.13"
 lazy val silencerVersion = "1.7.8"
 
 libraryDependencies ++= Seq(
-  "com.chuusai" %% "shapeless" % "2.3.7",
+  "com.chuusai" %% "shapeless" % "2.3.8",
   // cats
   "org.typelevel" %% "cats-core" % catsVersion withSources (),
   "org.typelevel" %% "cats-free" % catsVersion withSources (),

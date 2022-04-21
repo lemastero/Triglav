@@ -31,7 +31,7 @@ class BartoszMilewskiTalk {
   }
 
   // type Yo f a = Functor f => Reader a -> f
-  abstract class Yo[F[_]: Functor, A] {
+  abstract class Yo[F[_], A] {
     def apply(): Reader[A, *] ~> F[*]
   }
 
@@ -88,7 +88,7 @@ class BartoszMilewskiTalk {
         (sa andThen a, b andThen bt)
       }
     }
-  abstract class ProYo[P[_, _]: Profunctor, A, B] {
+  abstract class ProYo[P[_, _], A, B] {
     def apply(): ProReader[A, B, *, *] ~~> P[*, *]
   }
 

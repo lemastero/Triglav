@@ -13,7 +13,7 @@ lazy val catsMtlVersion = "1.2.1"
 lazy val scalaTestPlusVersion = "3.1.0.0-RC2"
 lazy val scalacheckVersion = "1.14.3"
 lazy val zioVersion = "1.0.16"
-lazy val silencerVersion = "1.7.9"
+lazy val silencerVersion = "1.7.10"
 
 libraryDependencies ++= Seq(
   "org.typelevel" %% "cats-core" % catsVersion,

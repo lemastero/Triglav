@@ -8,7 +8,7 @@ scalaVersion := "2.13.8"
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 
-lazy val catsVersion = "2.8.0"
+lazy val catsVersion = "2.9.0"
 lazy val catsMtlVersion = "1.2.1"
 lazy val scalaTestPlusVersion = "3.1.0.0-RC2"
 lazy val scalacheckVersion = "1.14.3"

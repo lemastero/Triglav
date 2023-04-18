@@ -13,7 +13,7 @@ object TrifunctorInstancesZIO {
     override def zimap[E, A, R, EE, AA, RR](
         fa: ZIO[E, A, R]
     )(f: EE => E, g: A => AA, h: R => RR): ZIO[EE, AA, RR] =
-      fa.bimap(g, h).provideSome(f)
+      fa.mapBoth(g, h).provideSome(f)
   }
 
   // ZLayer[-RIn, +E, +ROut]
@@ -33,7 +33,7 @@ object TrifunctorInstancesZIO {
       override def zimap[E, A, R, EE, AA, RR](
           fa: ZManaged[E, A, R]
       )(f: EE => E, g: A => AA, h: R => RR): ZManaged[EE, AA, RR] =
-        fa.bimap(g, h).provideSome(f)
+        fa.mapBoth(g, h).provideSome(f)
     }
 
   // ZStream[-R, +E, +O]
@@ -53,6 +53,6 @@ object TrifunctorInstancesZIO {
       override def zimap[E, A, R, EE, AA, RR](
           fa: ZSTM[E, A, R]
       )(f: EE => E, g: A => AA, h: R => RR): ZSTM[EE, AA, RR] =
-        fa.bimap(g, h).provideSome(f)
+        fa.mapBoth(g, h).provideSome(f)
     }
 }

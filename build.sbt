@@ -4,7 +4,7 @@ description := "Tremble FP mortals as Trzygłów is walking among us!"
 
 version := "0.0.1"
 
-scalaVersion := "2.13.8"
+scalaVersion := "2.13.12"
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 

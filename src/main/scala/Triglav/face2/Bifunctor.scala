@@ -105,9 +105,9 @@ object BifunctorInstances {
 //      fa match { case (a,b,c,d) => (a, b, f(c), g(d)) }
 //  }
 
-  //implicit def tuple4BifunctorXaXb[X1,X2]: Bifunctor[(X1,*,X2,*)] = ??? // TODO
-  //implicit def tuple4BifunctorXabX[X1,X2]: Bifunctor[(X1,*,*,X2)] = ??? // TODO
-  //implicit def tuple4BifunctoraXXb[X1,X2]: Bifunctor[(*,X1,X2,*)] = ??? // TODO
-  //implicit def tuple4BifunctoraXbX[X1,X2]: Bifunctor[(*,X1,*,X2)] = ??? // TODO
-  //implicit def tuple4BifunctorabXX[X1,X2]: Bifunctor[(*,*,X1,X2)] = ??? // TODO
+  // implicit def tuple4BifunctorXaXb[X1,X2]: Bifunctor[(X1,*,X2,*)] = ??? // TODO
+  // implicit def tuple4BifunctorXabX[X1,X2]: Bifunctor[(X1,*,*,X2)] = ??? // TODO
+  // implicit def tuple4BifunctoraXXb[X1,X2]: Bifunctor[(*,X1,X2,*)] = ??? // TODO
+  // implicit def tuple4BifunctoraXbX[X1,X2]: Bifunctor[(*,X1,*,X2)] = ??? // TODO
+  // implicit def tuple4BifunctorabXX[X1,X2]: Bifunctor[(*,*,X1,X2)] = ??? // TODO
 }

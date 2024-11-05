@@ -17,21 +17,21 @@ object Limit {
 
   /** Terminal object (final object)
     *
-    * Given C be a Category. Terminal object in C is object T
-    * such that (universal property) given any other object X
-    * there is unique morphism from X to terminal object.
+    * Given C be a Category. Terminal object in C is object T such that
+    * (universal property) given any other object X there is unique morphism
+    * from X to terminal object.
     *
-    *  X -----> T
+    * X -----> T
     *
     * Examples:
-    * - Set: every set with 1 element e.g. {42}
-    * - Grp: trivial group
-    * - Top: one point space
-    * - Poset: maximum element (if exists)
+    *   - Set: every set with 1 element e.g. {42}
+    *   - Grp: trivial group
+    *   - Top: one point space
+    *   - Poset: maximum element (if exists)
     *
     * Non examples:
-    * - Natural numbers (no max)
-    * - Vector spaces
+    *   - Natural numbers (no max)
+    *   - Vector spaces
     *
     * Terminal objects in C are unique up to unique isomorphism.
     *

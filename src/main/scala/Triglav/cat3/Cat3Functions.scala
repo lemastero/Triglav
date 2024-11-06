@@ -1,9 +1,10 @@
 package Triglav.cat3
 
-/** 3-category,  and function composition ()
-  * - functions (0-cells, objects)
-  * - functions between functions (1-morphisms)
-  * - functions between functions with the same domain and codomain between functions (2-morphism)
+/** 3-category, and function composition ()
+  *   - functions (0-cells, objects)
+  *   - functions between functions (1-morphisms)
+  *   - functions between functions with the same domain and codomain between
+  *     functions (2-morphism)
   *
   * See Tom Leinster [An introduction to n-categories](https://www.youtube.com/watch?v=6bnU7_6CNa0)
   */

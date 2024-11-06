@@ -9,19 +9,15 @@ scalaVersion := "2.13.15"
 resolvers += Resolver.sonatypeRepo("snapshots")
 
 lazy val catsVersion = "2.12.0"
-lazy val catsMtlVersion = "1.2.1"
-lazy val scalaTestPlusVersion = "3.1.0.0-RC2"
 lazy val scalacheckVersion = "1.14.3"
 lazy val zioVersion = "1.0.18"
-lazy val silencerVersion = "1.17.13"
 
 libraryDependencies ++= Seq(
-  "org.typelevel" %% "cats-core" % catsVersion,
-  "dev.zio" %% "zio" % zioVersion,
-  "dev.zio" %% "zio-prelude" % "0.0.0+369-a72a24af-SNAPSHOT",
-  "dev.zio" %% "zio-test" % zioVersion % Test,
-  "dev.zio" %% "zio-test-sbt" % zioVersion % Test,
-  "com.github.ghik" % "silencer-lib" % silencerVersion % Provided cross CrossVersion.full
+  "org.typelevel" %% "cats-core"   % catsVersion,
+  "dev.zio"       %% "zio"          % zioVersion,
+  "dev.zio"       %% "zio-prelude"  % "0.0.0+369-a72a24af-SNAPSHOT",
+  "dev.zio"       %% "zio-test"     % zioVersion % Test,
+  "dev.zio"       %% "zio-test-sbt" % zioVersion % Test
 )
 
 addCompilerPlugin(

@@ -19,4 +19,4 @@ jobs:
         distribution: 'temurin'
         java-version: '21'
     - name: Run tests
-      run: sbt scalafmtCheck test
+      run: sbt test

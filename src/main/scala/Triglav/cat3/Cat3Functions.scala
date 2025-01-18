@@ -6,7 +6,8 @@ package Triglav.cat3
   *   - functions between functions with the same domain and codomain between
   *     functions (2-morphism)
   *
-  * See Tom Leinster [An introduction to n-categories](https://www.youtube.com/watch?v=6bnU7_6CNa0)
+  * See Tom Leinster [An introduction to
+  * n-categories](https://www.youtube.com/watch?v=6bnU7_6CNa0)
   */
 object Cat3Functions {
 

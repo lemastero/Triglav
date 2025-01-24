@@ -107,11 +107,10 @@ object Limit {
       (q andThen f)(u) == (p andThen g)(u)
   }
 
-  /** Equalizer is a limit where diagram has 2 objects A, B
-    * and 2 morphisms A => B
+  /** Equalizer is a limit where diagram has 2 objects A, B and 2 morphisms A =>
+    * B
     *
-    *   --->
-    * A ---> B
+    * ---> A ---> B
     */
   abstract class Equalizer[X, +Y](val f: X => Y, val g: X => Y) extends Limit {
     type E

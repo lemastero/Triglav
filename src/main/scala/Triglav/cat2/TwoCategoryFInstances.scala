@@ -7,7 +7,8 @@ object TwoCategoryFInstances {
     def absurd[A[_]]: Void ~> A
   }
 
-  trait NatCat2 extends TwoCategory[~>] { // category of type constructors with one argument and natural transformations
+  trait NatCat2
+      extends TwoCategory[~>] { // category of type constructors with one argument and natural transformations
     override def id[Obj[_]]: Obj ~> Obj = IdentityNat[Obj]
     override def compose[A[_], B[_], C[_]](f: B ~> C)(g: A ~> B): A ~> C =
       f compose g
